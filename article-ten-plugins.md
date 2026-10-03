@@ -27,30 +27,39 @@ DSH（DeepSeek Harness）是个 Electron 桌面应用，界面左边是对话，
 
 ## 先说 DSH 是什么
 
-DSH（DeepSeek Harness）是 DeepSeek 的 agent 运行环境：一个 Electron 桌面应用 + 一套 CLI。
-左边是对话，右边是**右侧栏** —— 官方在那儿放了文件、终端、浏览器三个 tab。
+DSH（DeepSeek Harness）是 DeepSeek 的 agent 运行环境：左边是对话，右边是**右侧栏** ——
+官方在那儿放了文件、终端、浏览器三个 tab。
 
-装它有两种方式：
+关键在于：**它把第三方插件和官方那几个 tab 一视同仁，走的是同一套机制**。
+所以给右侧栏加一个 app，就是装一个插件。
 
-```
-# 桌面版（推荐：右侧栏、内嵌浏览器、终端都在里面）
-#   Windows / macOS 安装包从 https://harness.deepseek.com 下载
+## 在 DSH 里怎么装这些插件（这条最重要）
 
-# 或者只要 CLI（得到 dsh 命令）：
-npm i -g @deepseek-ai/dsh
-dsh --help
-```
+桌面版最省事：**右侧栏 →「插件」→「添加插件」→ 把包名填进去**，比如 `dsh-rss-dock`。
 
-## 装这些插件
+或者用 CLI（`--profile` 换成你自己的 profile 名，桌面版默认叫 `desktop`）：
 
 ```
-# CLI 方式（profile 名按你自己的来；桌面版的叫 desktop）
 dsh plugin --profile desktop add dsh-rss-dock
-
-# 桌面版也可以走 GUI：右侧栏「插件 → 添加插件」，把包名填进去
 ```
 
-装完**右侧栏点「+」**，就能看到那个 app 的入口（不会自动蹦出来，右侧栏的 tab 都要自己开）。
+十个一起装（一行一个，复制粘贴就行）：
+
+```
+dsh plugin --profile desktop add dsh-radio-dock
+dsh plugin --profile desktop add dsh-finance-dock
+dsh plugin --profile desktop add dsh-rss-dock
+dsh plugin --profile desktop add dsh-calendar-dock
+dsh plugin --profile desktop add dsh-ledger-dock
+dsh plugin --profile desktop add dsh-calorie-dock
+dsh plugin --profile desktop add dsh-todo-dock
+dsh plugin --profile desktop add dsh-pomodoro-dock
+dsh plugin --profile desktop add dsh-irc-dock
+dsh plugin --profile desktop add dsh-qqmail-dock
+```
+
+装完**重启一次应用**（这类插件的界面半边在启动时就固化了，Ctrl+F5 不管用），
+然后**右侧栏点「+」**才能看到它们 —— 右侧栏的 tab 不会自己蹦出来，都得点开一次。
 
 ## 这十个都是干什么的
 
