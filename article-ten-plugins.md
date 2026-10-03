@@ -25,22 +25,75 @@ DSH（DeepSeek Harness）是个 Electron 桌面应用，界面左边是对话，
 - 💬 **IRC 客户端**（`dsh-irc-dock`）—— 自己写的薄协议层，SASL 加自签证书加限次重连。
 - 📧 **QQ 邮箱**（`dsh-qqmail-dock`）—— 读最近邮件、看正文、发纯文本，发送要 confirm。
 
-## 全在这儿
+## 先说 DSH 是什么
 
-| 插件 | 包名 | 地址 |
-| --- | --- | --- |
-| 📻 **车载电台** | `dsh-radio-dock` | [GitHub](https://github.com/lemonhall/dsh-radio-dock) · [npm](https://www.npmjs.com/package/dsh-radio-dock) |
-| 📈 **金融终端** | `dsh-finance-dock` | [GitHub](https://github.com/lemonhall/dsh-finance-dock) · [npm](https://www.npmjs.com/package/dsh-finance-dock) |
-| 📰 **RSS 阅读器** | `dsh-rss-dock` | [GitHub](https://github.com/lemonhall/dsh-rss-dock) · [npm](https://www.npmjs.com/package/dsh-rss-dock) |
-| 📅 **通用日历** | `dsh-calendar-dock` | [GitHub](https://github.com/lemonhall/dsh-calendar-dock) · [npm](https://www.npmjs.com/package/dsh-calendar-dock) |
-| 💰 **记账本** | `dsh-ledger-dock` | [GitHub](https://github.com/lemonhall/dsh-ledger-dock) · [npm](https://www.npmjs.com/package/dsh-ledger-dock) |
-| 🔥 **卡路里日记** | `dsh-calorie-dock` | [GitHub](https://github.com/lemonhall/dsh-calorie-dock) · [npm](https://www.npmjs.com/package/dsh-calorie-dock) |
-| ✅ **待办** | `dsh-todo-dock` | [GitHub](https://github.com/lemonhall/dsh-todo-dock) · [npm](https://www.npmjs.com/package/dsh-todo-dock) |
-| 🍅 **番茄闹钟** | `dsh-pomodoro-dock` | [GitHub](https://github.com/lemonhall/dsh-pomodoro-dock) · [npm](https://www.npmjs.com/package/dsh-pomodoro-dock) |
-| 💬 **IRC 客户端** | `dsh-irc-dock` | [GitHub](https://github.com/lemonhall/dsh-irc-dock) · [npm](https://www.npmjs.com/package/dsh-irc-dock) |
-| 📧 **QQ 邮箱** | `dsh-qqmail-dock` | [GitHub](https://github.com/lemonhall/dsh-qqmail-dock) · [npm](https://www.npmjs.com/package/dsh-qqmail-dock) |
+DSH（DeepSeek Harness）是 DeepSeek 的 agent 运行环境：一个 Electron 桌面应用 + 一套 CLI。
+左边是对话，右边是**右侧栏** —— 官方在那儿放了文件、终端、浏览器三个 tab。
 
-十个都是 MIT、都能从 npm 装、都只截右侧栏的面板图（我这台机器桌面左下角有真名，从不整屏）。
+装它有两种方式：
+
+```
+# 桌面版（推荐：右侧栏、内嵌浏览器、终端都在里面）
+#   Windows / macOS 安装包从 https://harness.deepseek.com 下载
+
+# 或者只要 CLI（得到 dsh 命令）：
+npm i -g @deepseek-ai/dsh
+dsh --help
+```
+
+## 装这些插件
+
+```
+# CLI 方式（profile 名按你自己的来；桌面版的叫 desktop）
+dsh plugin --profile desktop add dsh-rss-dock
+
+# 桌面版也可以走 GUI：右侧栏「插件 → 添加插件」，把包名填进去
+```
+
+装完**右侧栏点「+」**，就能看到那个 app 的入口（不会自动蹦出来，右侧栏的 tab 都要自己开）。
+
+## 这十个都是干什么的
+
+- 📻 **车载电台**（`dsh-radio-dock`）—— 右侧栏里的一个 3D 车载电台：车模、弯道、月亮星空、车流超车。
+- 📈 **金融终端**（`dsh-finance-dock`）—— 13 类 48 个标的 + three.js 地球，点列表里的标的，地球自动转过去。
+- 📰 **RSS 阅读器**（`dsh-rss-dock`）—— 8 个源、未读与收藏双向状态，Agent 也能读。
+- 📅 **通用日历**（`dsh-calendar-dock`）—— 月视图 + 当天事件 + 接下来，日期用本地字符串跨进程。
+- 💰 **记账本**（`dsh-ledger-dock`）—— 金额按分存整数，本月结余 + 分类统计。
+- 🔥 **卡路里日记**（`dsh-calorie-dock`）—— 内置食物热量表，选食物加克数自动算 kcal。
+- ✅ **待办**（`dsh-todo-dock`）—— 一行一件、回车就加、勾掉即完成。
+- 🍅 **番茄闹钟**（`dsh-pomodoro-dock`）—— 只存 endsAt 的计时，切 tab 不中断。
+- 💬 **IRC 客户端**（`dsh-irc-dock`）—— 自己写的薄协议层，SASL 加自签证书加限次重连。
+- 📧 **QQ 邮箱**（`dsh-qqmail-dock`）—— 读最近邮件、看正文、发纯文本，发送要 confirm。
+
+## 地址（纯文本，方便复制）
+
+**GitHub：**
+
+https://github.com/lemonhall/dsh-radio-dock
+https://github.com/lemonhall/dsh-finance-dock
+https://github.com/lemonhall/dsh-rss-dock
+https://github.com/lemonhall/dsh-calendar-dock
+https://github.com/lemonhall/dsh-ledger-dock
+https://github.com/lemonhall/dsh-calorie-dock
+https://github.com/lemonhall/dsh-todo-dock
+https://github.com/lemonhall/dsh-pomodoro-dock
+https://github.com/lemonhall/dsh-irc-dock
+https://github.com/lemonhall/dsh-qqmail-dock
+
+**npm：**
+
+https://www.npmjs.com/package/dsh-radio-dock
+https://www.npmjs.com/package/dsh-finance-dock
+https://www.npmjs.com/package/dsh-rss-dock
+https://www.npmjs.com/package/dsh-calendar-dock
+https://www.npmjs.com/package/dsh-ledger-dock
+https://www.npmjs.com/package/dsh-calorie-dock
+https://www.npmjs.com/package/dsh-todo-dock
+https://www.npmjs.com/package/dsh-pomodoro-dock
+https://www.npmjs.com/package/dsh-irc-dock
+https://www.npmjs.com/package/dsh-qqmail-dock
+
+十个都是 MIT。都只截右侧栏的面板图（我这台机器桌面左下角有真名，从不整屏）。
 
 ## 写这批插件，我反复踩的四个坑
 

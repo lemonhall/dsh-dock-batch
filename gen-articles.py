@@ -96,13 +96,48 @@ DSH（DeepSeek Harness）是个 Electron 桌面应用，界面左边是对话，
 
 {details}
 
-## 全在这儿
+## 先说 DSH 是什么
 
-| 插件 | 包名 | 地址 |
-| --- | --- | --- |
-{rows}
+DSH（DeepSeek Harness）是 DeepSeek 的 agent 运行环境：一个 Electron 桌面应用 + 一套 CLI。
+左边是对话，右边是**右侧栏** —— 官方在那儿放了文件、终端、浏览器三个 tab。
 
-十个都是 MIT、都能从 npm 装、都只截右侧栏的面板图（我这台机器桌面左下角有真名，从不整屏）。
+装它有两种方式：
+
+```
+# 桌面版（推荐：右侧栏、内嵌浏览器、终端都在里面）
+#   Windows / macOS 安装包从 https://harness.deepseek.com 下载
+
+# 或者只要 CLI（得到 dsh 命令）：
+npm i -g @deepseek-ai/dsh
+dsh --help
+```
+
+## 装这些插件
+
+```
+# CLI 方式（profile 名按你自己的来；桌面版的叫 desktop）
+dsh plugin --profile desktop add dsh-rss-dock
+
+# 桌面版也可以走 GUI：右侧栏「插件 → 添加插件」，把包名填进去
+```
+
+装完**右侧栏点「+」**，就能看到那个 app 的入口（不会自动蹦出来，右侧栏的 tab 都要自己开）。
+
+## 这十个都是干什么的
+
+{details}
+
+## 地址（纯文本，方便复制）
+
+**GitHub：**
+
+{gh_list}
+
+**npm：**
+
+{npm_list}
+
+十个都是 MIT。都只截右侧栏的面板图（我这台机器桌面左下角有真名，从不整屏）。
 
 ## 写这批插件，我反复踩的四个坑
 
@@ -160,8 +195,12 @@ def render_article(item):
         + "## 双向的，不只看\n\n"
         + "这是这批插件的共同点：**状态在宿主、界面 2 秒轮询**。所以我在面板里点一下，Agent 调工具就能读到；"
         + "Agent 写一次（比如「帮我记一笔午饭 12.5」），面板自己就变了。\n\n"
-        + "装：\n\n```\nplugin_manager install_bundle target=link:E:\\development\\" + item["dir"] + "\n"
-        + "# 或从 npm\ndash plugin --profile <profile> add " + item["dir"] + "\n```\n\n"
+        + "装：\n\n```\n# 先装 DSH（桌面版从 https://harness.deepseek.com 下载安装包；只要 CLI 的话）：\n"
+        + "npm i -g @deepseek-ai/dsh\n\n"
+        + "# 再装这个插件（桌面版也可以走 GUI：右侧栏「插件 → 添加插件」）\n"
+        + "dsh plugin --profile desktop add " + item["dir"] + "\n\n"
+        + "# 如果你是开发者、想用本地目录直接挂：\n"
+        + "plugin_manager install_bundle target=link:E:\\development\\" + item["dir"] + "\n```\n\n"
         + "代码在 <https://github.com/lemonhall/" + item["dir"] + ">，npm 上是 `" + item["dir"] + "`。"
         + "右侧栏点「**+**」→ 选「" + item["name"] + "」就能看到它。\n\n"
         + "## 已知限制\n\n" + section(readme, "已知限制") + "\n"
@@ -170,12 +209,9 @@ def render_article(item):
 
 def render_story():
     details = "\n".join("- " + e + " **" + n + "**（`" + p + "`）—— " + d for p, e, n, d in TEN)
-    rows = "\n".join(
-        "| " + e + " **" + n + "** | `" + p + "` | [GitHub](https://github.com/lemonhall/" + p
-        + ") · [npm](https://www.npmjs.com/package/" + p + ") |"
-        for p, e, n, _ in TEN
-    )
-    return STORY.replace("{details}", details).replace("{rows}", rows)
+    gh_list = "\n".join("https://github.com/lemonhall/" + p for p, _, _, _ in TEN)
+    npm_list = "\n".join("https://www.npmjs.com/package/" + p for p, _, _, _ in TEN)
+    return STORY.replace("{details}", details).replace("{gh_list}", gh_list).replace("{npm_list}", npm_list)
 
 
 def make_collage():
